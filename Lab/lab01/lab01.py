@@ -8,7 +8,11 @@ def digit(n, k):
     >>> digit(3579, 10)
     0
     """
-    return ____
+    s=str(n);#转化字符串
+    if k<len(s):
+        return int(s[-(k+1)])#python允许数组索引从-1开始减小，用来表示末位元素及其之前的元素.
+    else:
+        return 0
 
 
 def middle(a, b, c):
@@ -26,7 +30,16 @@ def middle(a, b, c):
     >>> middle(30, 5, 40)
     30
     """
-    return ____
+    
+    max_num=max(a,b,c)
+    min_num=min(a,b,c)
+
+    if a!=max_num and a!= min_num:
+        return a
+    elif b!=max_num and b!= min_num:
+        return b
+    else: 
+        return c
 
 
 def falling(n, k):
@@ -41,7 +54,11 @@ def falling(n, k):
     >>> falling(4, 0)
     1
     """
-    "*** YOUR CODE HERE ***"
+    
+    if k==0:
+        return 1
+    else:
+        return n*falling(n-1,k-1)
 
 
 def divisible_by_k(n, k):
@@ -64,7 +81,14 @@ def divisible_by_k(n, k):
     >>> c
     0
     """
-    "*** YOUR CODE HERE ***"
+    num=0
+    i=k
+    while(i<=n):
+        if i%k==0:
+            num+=1
+            print(i)
+        i+=1
+    return num
 
 
 def sum_digits(y):
@@ -80,7 +104,12 @@ def sum_digits(y):
     >>> a
     6
     """
-    "*** YOUR CODE HERE ***"
+    
+    total=0
+    s=str(y)
+    for i in range(len(s)):
+        total+=int(s[i])
+    return total
 
 
 def double_eights(n):
@@ -98,5 +127,14 @@ def double_eights(n):
     >>> double_eights(80808080)
     False
     """
-    "*** YOUR CODE HERE ***"
 
+    flag=0#当为1时。前一位是8，为0时前一位不是8
+    s=str(n)
+    for i in range(len(s)):
+        if s[i]=='8' and flag==1:
+            print("True")
+            return 
+        elif s[i]=='8':
+            flag=1
+        else:flag=0
+    print("False")
