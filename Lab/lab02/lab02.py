@@ -1,4 +1,3 @@
-
 def composite_identity(f, g):
     """
     Return a function with one parameter x that returns True if f(g(x)) is
@@ -13,8 +12,19 @@ def composite_identity(f, g):
     >>> b1(4)                            # (4 + 1) ** 2 != 4 ** 2 + 1
     False
     """
-    "*** YOUR CODE HERE ***"
+    
+    #定义嵌套函数:a function with one parameter x that 
+    # returns True if f(g(x)) is equal to g(f(x)).
+    def check_identity(x):
+        #以下二者是值，用于判定是否相等，确认返回值
+        result_fg=f(g(x))
+        result_gf=g(f(x))
 
+        return result_fg==result_gf
+    
+    return check_identity
+
+#----------------------------------------------------------------
 
 def sum_digits(y):
     """Return the sum of the digits of non-negative integer y."""
@@ -39,6 +49,8 @@ def count_cond(condition):
     1 to N that satisfy the two-argument predicate function Condition, where
     the first argument for Condition is N and the second argument is the
     number from 1 to N.
+    返回一个带有一个参数 N 的函数。这个返回的函数会统计从 1 到 N 之间所有满足双参数谓词函数 Condition 的数字。
+    其中，Condition 函数的第一个参数是 N，第二个参数是 1 到 N 范围内的当前数字。
 
     >>> count_fives = count_cond(lambda n, i: sum_digits(n * i) == 5)
     >>> count_fives(10)   # 50 (10 * 5)
@@ -59,46 +71,47 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
-    "*** YOUR CODE HERE ***"
+    
+    
 
 
-def multiple(a, b):
-    """Return the smallest number n that is a multiple of both a and b.
+# def multiple(a, b):
+#     """Return the smallest number n that is a multiple of both a and b.
 
-    >>> multiple(3, 4)
-    12
-    >>> multiple(14, 21)
-    42
-    """
-    "*** YOUR CODE HERE ***"
+#     >>> multiple(3, 4)
+#     12
+#     >>> multiple(14, 21)
+#     42
+#     """
+#     "*** YOUR CODE HERE ***"
 
 
 
-def cycle(f1, f2, f3):
-    """Returns a function that is itself a higher-order function.
+# def cycle(f1, f2, f3):
+#     """Returns a function that is itself a higher-order function.
 
-    >>> def add1(x):
-    ...     return x + 1
-    >>> def times2(x):
-    ...     return x * 2
-    >>> def add3(x):
-    ...     return x + 3
-    >>> my_cycle = cycle(add1, times2, add3)
-    >>> identity = my_cycle(0)
-    >>> identity(5)
-    5
-    >>> add_one_then_double = my_cycle(2)
-    >>> add_one_then_double(1)
-    4
-    >>> do_all_functions = my_cycle(3)
-    >>> do_all_functions(2)
-    9
-    >>> do_more_than_a_cycle = my_cycle(4)
-    >>> do_more_than_a_cycle(2)
-    10
-    >>> do_two_cycles = my_cycle(6)
-    >>> do_two_cycles(1)
-    19
-    """
-    "*** YOUR CODE HERE ***"
+#     >>> def add1(x):
+#     ...     return x + 1
+#     >>> def times2(x):
+#     ...     return x * 2
+#     >>> def add3(x):
+#     ...     return x + 3
+#     >>> my_cycle = cycle(add1, times2, add3)
+#     >>> identity = my_cycle(0)
+#     >>> identity(5)
+#     5
+#     >>> add_one_then_double = my_cycle(2)
+#     >>> add_one_then_double(1)
+#     4
+#     >>> do_all_functions = my_cycle(3)
+#     >>> do_all_functions(2)
+#     9
+#     >>> do_more_than_a_cycle = my_cycle(4)
+#     >>> do_more_than_a_cycle(2)
+#     10
+#     >>> do_two_cycles = my_cycle(6)
+#     >>> do_two_cycles(1)
+#     19
+#     """
+#     "*** YOUR CODE HERE ***"
 
