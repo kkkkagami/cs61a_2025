@@ -24,7 +24,7 @@ def composite_identity(f, g):
     
     return check_identity
 
-#----------------------------------------------------------------
+#-------------------------------------------------------------
 
 def sum_digits(y):
     """Return the sum of the digits of non-negative integer y."""
@@ -71,47 +71,82 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
+
+    def satisfy(n):
+        ans=0
+        for i in range(1,n+1):
+            if condition(n,i):
+                ans+=1
+        return ans
     
+    return satisfy
     
+#-----------------------------------------------------------
 
+def multiple(a, b):
+    """Return the smallest number n that is a multiple of both a and b.
 
-# def multiple(a, b):
-#     """Return the smallest number n that is a multiple of both a and b.
+    >>> multiple(3, 4)
+    12
+    >>> multiple(14, 21)
+    42
+    """
+    
+    i=max(a,b)
+    while True:
+        if i%a==0 and i%b==0:
+            return i
+        else:
+            i+=1
 
-#     >>> multiple(3, 4)
-#     12
-#     >>> multiple(14, 21)
-#     42
-#     """
-#     "*** YOUR CODE HERE ***"
+#------------------------------------------------------------
 
+def cycle(f1, f2, f3):
+    """Returns a function that is itself a higher-order function.
 
+    >>> def add1(x):
+    ...     return x + 1
+    >>> def times2(x):
+    ...     return x * 2
+    >>> def add3(x):
+    ...     return x + 3
+    >>> my_cycle = cycle(add1, times2, add3)
+    >>> identity = my_cycle(0)
+    >>> identity(5)
+    5
+    >>> add_one_then_double = my_cycle(2)
+    >>> add_one_then_double(1)
+    4
+    >>> do_all_functions = my_cycle(3)
+    >>> do_all_functions(2)
+    9
+    >>> do_more_than_a_cycle = my_cycle(4)
+    >>> do_more_than_a_cycle(2)
+    10
+    >>> do_two_cycles = my_cycle(6)
+    >>> do_two_cycles(1)
+    19
+    """
+    
+    # Define a function cycle that takes in three functions f1, f2, and f3, as arguments.
+    # cycle will return another function g that should take in an integer argument 
+    # n and return another function h. That final function h should take in an argument 
+    # x and cycle through applying f1, f2, and f3 to x, depending on what n was. 
 
-# def cycle(f1, f2, f3):
-#     """Returns a function that is itself a higher-order function.
+    def g(n):
+        def h(x):
+            p=n//3
+            q=n%3
 
-#     >>> def add1(x):
-#     ...     return x + 1
-#     >>> def times2(x):
-#     ...     return x * 2
-#     >>> def add3(x):
-#     ...     return x + 3
-#     >>> my_cycle = cycle(add1, times2, add3)
-#     >>> identity = my_cycle(0)
-#     >>> identity(5)
-#     5
-#     >>> add_one_then_double = my_cycle(2)
-#     >>> add_one_then_double(1)
-#     4
-#     >>> do_all_functions = my_cycle(3)
-#     >>> do_all_functions(2)
-#     9
-#     >>> do_more_than_a_cycle = my_cycle(4)
-#     >>> do_more_than_a_cycle(2)
-#     10
-#     >>> do_two_cycles = my_cycle(6)
-#     >>> do_two_cycles(1)
-#     19
-#     """
-#     "*** YOUR CODE HERE ***"
+            for i in range(p):
+                x=f3(f2(f1(x)))
 
+            if q==0:
+                return x
+            elif q==1:
+                return f1(x)
+            elif q==2:
+                return f2(f1(x))
+            
+        return h
+    return g
