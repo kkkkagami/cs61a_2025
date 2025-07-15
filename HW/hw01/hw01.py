@@ -13,20 +13,20 @@ def a_plus_abs_b(a, b):
     3
     """
     if b < 0:
-        f = _____
+        f = lambda a,b: a+(-b)
     else:
-        f = _____
+        f = lambda a,b:a+b
     return f(a, b)
 
-def a_plus_abs_b_syntax_check():
-    """Check that you didn't change the return statement of a_plus_abs_b.
+# def a_plus_abs_b_syntax_check():
+#     """Check that you didn't change the return statement of a_plus_abs_b.
 
-    >>> # You aren't expected to understand the code of this test.
-    >>> import inspect, re
-    >>> re.findall(r'^\s*(return .*)', inspect.getsource(a_plus_abs_b), re.M)
-    ['return f(a, b)']
-    """
-    # You don't need to edit this function. It's just here to check your work.
+#     >>> # You aren't expected to understand the code of this test.
+#     >>> import inspect, re
+#     >>> re.findall(r'^\s*(return .*)', inspect.getsource(a_plus_abs_b), re.M)
+#     ['return f(a, b)']
+#     """
+#     #You don't need to edit this function. It's just here to check your work.
 
 
 def two_of_three(i, j, k):
@@ -42,17 +42,17 @@ def two_of_three(i, j, k):
     >>> two_of_three(5, 5, 5)
     50
     """
-    return _____
+    return i*i+j*j+k*k-pow(max(i,j,k),2)
 
-def two_of_three_syntax_check():
-    """Check that your two_of_three code consists of nothing but a return statement.
+# def two_of_three_syntax_check():
+#     """Check that your two_of_three code consists of nothing but a return statement.
 
-    >>> # You aren't expected to understand the code of this test.
-    >>> import inspect, ast
-    >>> [type(x).__name__ for x in ast.parse(inspect.getsource(two_of_three)).body[0].body]
-    ['Expr', 'Return']
-    """
-    # You don't need to edit this function. It's just here to check your work.
+#     >>> # You aren't expected to understand the code of this test.
+#     >>> import inspect, ast
+#     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(two_of_three)).body[0].body]
+#     ['Expr', 'Return']
+#     """
+#     # You don't need to edit this function. It's just here to check your work.
 
 
 def largest_factor(n):
@@ -65,7 +65,11 @@ def largest_factor(n):
     >>> largest_factor(13) # factor is 1 since 13 is prime
     1
     """
-    "*** YOUR CODE HERE ***"
+    
+    for i in range(n-1,0,-1):
+        if n%i==0:
+            return i
+
 
 
 def hailstone(n):
@@ -87,5 +91,16 @@ def hailstone(n):
     >>> b
     1
     """
-    "*** YOUR CODE HERE ***"
-
+    
+    times=0
+    while n!=1:
+        print(n)
+        times+=1
+        if n%2==0:
+            n//=2
+        else:
+            n=n*3+1
+        
+    print(1)
+    times+=1
+    return times
