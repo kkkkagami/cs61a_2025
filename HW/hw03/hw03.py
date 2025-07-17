@@ -25,6 +25,10 @@ def num_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if n<10:
+        return 1 if n==8 else 0
+    else:
+        return (1 if n%10==8 else 0)+num_eights(n//10)
 
 
 def digit_distance(n):
@@ -47,6 +51,14 @@ def digit_distance(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if n<10:
+        return 0
+    last_digit=n%10 #取出末位
+    second_last_digit=(n//10)%10 #取出倒数第二位
+    current_distance=abs(last_digit-second_last_digit)
+
+    return current_distance+digit_distance(n//10)
+    
 
 
 def interleaved_sum(n, odd_func, even_func):
@@ -71,20 +83,17 @@ def interleaved_sum(n, odd_func, even_func):
     True
     """
     "*** YOUR CODE HERE ***"
+    def is_odd(n):#辅助函数，判断是不是奇数
+        if n==1:
+            return True
+        else:
+            return not is_odd(n-1)
 
+    if n==1:
+        return odd_func(1)
+    else:
+        return interleaved_sum(n-1,odd_func,even_func)+(odd_func(n) if is_odd(n)==True else even_func(n))
 
-def next_smaller_dollar(bill):
-    """Returns the next smaller bill in order."""
-    if bill == 100:
-        return 50
-    if bill == 50:
-        return 20
-    if bill == 20:
-        return 10
-    elif bill == 10:
-        return 5
-    elif bill == 5:
-        return 1
 
 def count_dollars(total):
     """Return the number of ways to make change.
@@ -107,7 +116,44 @@ def count_dollars(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    return count_ways(total,100)
 
+def next_smaller_dollar(bill):
+    """Returns the next smaller bill in order."""
+    if bill == 100:
+        return 50
+    if bill == 50:
+        return 20
+    if bill == 20:
+        return 10
+    elif bill == 10:
+        return 5
+    elif bill == 5:
+        return 1
+    
+def count_ways(total,max_bill):
+    if total ==0:
+        return 1
+    
+    if max_bill is None or total<0:
+        return 0
+    
+    ways_by_current_max=count_ways(total-max_bill,max_bill)
+    way_without_current_max=count_ways(total,next_smaller_dollar(max_bill))
+
+    return way_without_current_max+ways_by_current_max
+
+def count_ways_upward(total,min_bill):
+    if total==0:
+        return 1
+    
+    if min_bill is None or total<0:
+        return 0
+    
+    ways_with_current_min=count_ways_upward(total-min_bill,min_bill)
+    ways_without_current_min=count_ways_upward(total,next_larger_dollar(min_bill))
+
+    return ways_with_current_min+ways_without_current_min
 
 def next_larger_dollar(bill):
     """Returns the next larger bill in order."""
@@ -143,7 +189,9 @@ def count_dollars_upward(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    return count_ways_upward(total,1)
 
+#------------
 
 def print_move(origin, destination):
     """Print instructions to move a disk."""
@@ -179,19 +227,34 @@ def move_stack(n, start, end):
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
     "*** YOUR CODE HERE ***"
 
+    if start+end==3:
+        free=3
+    elif start+end==4:
+        free=2
+    else:
+        free=1
 
-from operator import sub, mul
+    if n==1:
+        print_move(start,end)
 
-def make_anonymous_factorial():
-    """Return the value of an expression that computes factorial.
+    else:
+        move_stack(n-1,start,free)
+        print_move(start,end)
+        move_stack(n-1,free,end)
 
-    >>> make_anonymous_factorial()(5)
-    120
-    >>> from construct_check import check
-    >>> # ban any assignments or recursion
-    >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial',
-    ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
-    True
-    """
-    return 'YOUR_EXPRESSION_HERE'
+#-------------
 
+# from operator import sub, mul
+
+# def make_anonymous_factorial():
+#     """Return the value of an expression that computes factorial.
+
+#     >>> make_anonymous_factorial()(5)
+#     120
+#     >>> from construct_check import check
+#     >>> # ban any assignments or recursion
+#     >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial',
+#     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
+#     True
+#     """
+#     #???
