@@ -26,7 +26,14 @@ def insert_items(s, before, after):
     >>> large_s3 is large_s
     True
     """
-    "*** YOUR CODE HERE ***"
+
+    i=0
+    while i <len(s):
+        if s[i]==before:
+            s.insert(i+1,after)
+            i+=1
+        i+=1
+    return s
 
 
 def group_by(s, fn):
@@ -40,111 +47,111 @@ def group_by(s, fn):
     {9: [-3, 3], 4: [-2, 2], 1: [-1, 1], 0: [0]}
     """
     grouped = {}
-    for ____ in ____:
-        key = ____
+    for i in s:
+        key = fn(i)
         if key in grouped:
-            ____
+            grouped[key].append(i)
         else:
-            grouped[key] = ____
+            grouped[key] = [i]
     return grouped
 
 
-def count_occurrences(t, n, x):
-    """Return the number of times that x is equal to one of the
-    first n elements of iterator t.
+# def count_occurrences(t, n, x):
+#     """Return the number of times that x is equal to one of the
+#     first n elements of iterator t.
 
-    >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-    >>> count_occurrences(s, 10, 9)
-    3
-    >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-    >>> count_occurrences(t, 3, 10)
-    2
-    >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
-    >>> count_occurrences(u, 1, 3)  # Only iterate over 3
-    1
-    >>> count_occurrences(u, 3, 2)  # Only iterate over 2, 2, 2
-    3
-    >>> list(u)                     # Ensure that the iterator has advanced the right amount
-    [1, 2, 1, 4, 4, 5, 5, 5]
-    >>> v = iter([4, 1, 6, 6, 7, 7, 6, 6, 2, 2, 2, 5])
-    >>> count_occurrences(v, 6, 6)
-    2
-    """
-    "*** YOUR CODE HERE ***"
-
-
-def repeated(t, k):
-    """Return the first value in iterator t that appears k times in a row,
-    calling next on t as few times as possible.
-
-    >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-    >>> repeated(s, 2)
-    9
-    >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-    >>> repeated(t, 3)
-    8
-    >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
-    >>> repeated(u, 3)
-    2
-    >>> repeated(u, 3)
-    5
-    >>> v = iter([4, 1, 6, 6, 7, 7, 8, 8, 2, 2, 2, 5])
-    >>> repeated(v, 3)
-    2
-    """
-    assert k > 1
-    "*** YOUR CODE HERE ***"
+#     >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+#     >>> count_occurrences(s, 10, 9)
+#     3
+#     >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+#     >>> count_occurrences(t, 3, 10)
+#     2
+#     >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
+#     >>> count_occurrences(u, 1, 3)  # Only iterate over 3
+#     1
+#     >>> count_occurrences(u, 3, 2)  # Only iterate over 2, 2, 2
+#     3
+#     >>> list(u)                     # Ensure that the iterator has advanced the right amount
+#     [1, 2, 1, 4, 4, 5, 5, 5]
+#     >>> v = iter([4, 1, 6, 6, 7, 7, 6, 6, 2, 2, 2, 5])
+#     >>> count_occurrences(v, 6, 6)
+#     2
+#     """
+#     "*** YOUR CODE HERE ***"
 
 
-def sprout_leaves(t, leaves):
-    """Sprout new leaves containing the labels in leaves at each leaf of
-    the original tree t and return the resulting tree.
+# def repeated(t, k):
+#     """Return the first value in iterator t that appears k times in a row,
+#     calling next on t as few times as possible.
 
-    >>> t1 = tree(1, [tree(2), tree(3)])
-    >>> print_tree(t1)
-    1
-      2
-      3
-    >>> new1 = sprout_leaves(t1, [4, 5])
-    >>> print_tree(new1)
-    1
-      2
-        4
-        5
-      3
-        4
-        5
-
-    >>> t2 = tree(1, [tree(2, [tree(3)])])
-    >>> print_tree(t2)
-    1
-      2
-        3
-    >>> new2 = sprout_leaves(t2, [6, 1, 2])
-    >>> print_tree(new2)
-    1
-      2
-        3
-          6
-          1
-          2
-    """
-    "*** YOUR CODE HERE ***"
+#     >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+#     >>> repeated(s, 2)
+#     9
+#     >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+#     >>> repeated(t, 3)
+#     8
+#     >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
+#     >>> repeated(u, 3)
+#     2
+#     >>> repeated(u, 3)
+#     5
+#     >>> v = iter([4, 1, 6, 6, 7, 7, 8, 8, 2, 2, 2, 5])
+#     >>> repeated(v, 3)
+#     2
+#     """
+#     assert k > 1
+#     "*** YOUR CODE HERE ***"
 
 
-def partial_reverse(s, start):
-    """Reverse part of a list in-place, starting with start up to the end of
-    the list.
+# def sprout_leaves(t, leaves):
+#     """Sprout new leaves containing the labels in leaves at each leaf of
+#     the original tree t and return the resulting tree.
 
-    >>> a = [1, 2, 3, 4, 5, 6, 7]
-    >>> partial_reverse(a, 2)
-    >>> a
-    [1, 2, 7, 6, 5, 4, 3]
-    >>> partial_reverse(a, 5)
-    >>> a
-    [1, 2, 7, 6, 5, 3, 4]
-    """
-    "*** YOUR CODE HERE ***"
+#     >>> t1 = tree(1, [tree(2), tree(3)])
+#     >>> print_tree(t1)
+#     1
+#       2
+#       3
+#     >>> new1 = sprout_leaves(t1, [4, 5])
+#     >>> print_tree(new1)
+#     1
+#       2
+#         4
+#         5
+#       3
+#         4
+#         5
+
+#     >>> t2 = tree(1, [tree(2, [tree(3)])])
+#     >>> print_tree(t2)
+#     1
+#       2
+#         3
+#     >>> new2 = sprout_leaves(t2, [6, 1, 2])
+#     >>> print_tree(new2)
+#     1
+#       2
+#         3
+#           6
+#           1
+#           2
+#     """
+#     "*** YOUR CODE HERE ***"
+
+
+# def partial_reverse(s, start):
+#     """Reverse part of a list in-place, starting with start up to the end of
+#     the list.
+
+#     >>> a = [1, 2, 3, 4, 5, 6, 7]
+#     >>> partial_reverse(a, 2)
+#     >>> a
+#     [1, 2, 7, 6, 5, 4, 3]
+#     >>> partial_reverse(a, 5)
+#     >>> a
+#     [1, 2, 7, 6, 5, 3, 4]
+#     """
+#     "*** YOUR CODE HERE ***"
 
 
 
