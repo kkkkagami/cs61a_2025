@@ -56,52 +56,65 @@ def group_by(s, fn):
     return grouped
 
 
-# def count_occurrences(t, n, x):
-#     """Return the number of times that x is equal to one of the
-#     first n elements of iterator t.
+def count_occurrences(t, n, x):
+    """Return the number of times that x is equal to one of the
+    first n elements of iterator t.
 
-#     >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-#     >>> count_occurrences(s, 10, 9)
-#     3
-#     >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-#     >>> count_occurrences(t, 3, 10)
-#     2
-#     >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
-#     >>> count_occurrences(u, 1, 3)  # Only iterate over 3
-#     1
-#     >>> count_occurrences(u, 3, 2)  # Only iterate over 2, 2, 2
-#     3
-#     >>> list(u)                     # Ensure that the iterator has advanced the right amount
-#     [1, 2, 1, 4, 4, 5, 5, 5]
-#     >>> v = iter([4, 1, 6, 6, 7, 7, 6, 6, 2, 2, 2, 5])
-#     >>> count_occurrences(v, 6, 6)
-#     2
-#     """
-#     "*** YOUR CODE HERE ***"
+    >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+    >>> count_occurrences(s, 10, 9)
+    3
+    >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+    >>> count_occurrences(t, 3, 10)
+    2
+    >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
+    >>> count_occurrences(u, 1, 3)  # Only iterate over 3
+    1
+    >>> count_occurrences(u, 3, 2)  # Only iterate over 2, 2, 2
+    3
+    >>> list(u)                     # Ensure that the iterator has advanced the right amount
+    [1, 2, 1, 4, 4, 5, 5, 5]
+    >>> v = iter([4, 1, 6, 6, 7, 7, 6, 6, 2, 2, 2, 5])
+    >>> count_occurrences(v, 6, 6)
+    2
+    """
+
+    return  sum(1 for _ in range(n) if next(t)==x)
 
 
-# def repeated(t, k):
-#     """Return the first value in iterator t that appears k times in a row,
-#     calling next on t as few times as possible.
+def repeated(t, k):
+    """Return the first value in iterator t that appears k times in a row,
+    calling next on t as few times as possible.
 
-#     >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-#     >>> repeated(s, 2)
-#     9
-#     >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
-#     >>> repeated(t, 3)
-#     8
-#     >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
-#     >>> repeated(u, 3)
-#     2
-#     >>> repeated(u, 3)
-#     5
-#     >>> v = iter([4, 1, 6, 6, 7, 7, 8, 8, 2, 2, 2, 5])
-#     >>> repeated(v, 3)
-#     2
-#     """
-#     assert k > 1
-#     "*** YOUR CODE HERE ***"
+    >>> s = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+    >>> repeated(s, 2)
+    9
+    >>> t = iter([10, 9, 10, 9, 9, 10, 8, 8, 8, 7])
+    >>> repeated(t, 3)
+    8
+    >>> u = iter([3, 2, 2, 2, 1, 2, 1, 4, 4, 5, 5, 5])
+    >>> repeated(u, 3)
+    2
+    >>> repeated(u, 3)
+    5
+    >>> v = iter([4, 1, 6, 6, 7, 7, 8, 8, 2, 2, 2, 5])
+    >>> repeated(v, 3)
+    2
+    """
+    assert k > 1
+    "*** YOUR CODE HERE ***"
+    count=1
+    prev=next(t)
+    for e in t:
+        if prev==e:#当前元素与上一位相同
+            count+=1
+        else:
+            count=1
+            prev=e
 
+        if count==k:
+            return e
+
+#--
 
 # def sprout_leaves(t, leaves):
 #     """Sprout new leaves containing the labels in leaves at each leaf of
@@ -136,7 +149,8 @@ def group_by(s, fn):
 #           1
 #           2
 #     """
-#     "*** YOUR CODE HERE ***"
+    
+
 
 
 # def partial_reverse(s, start):
@@ -154,8 +168,7 @@ def group_by(s, fn):
 #     "*** YOUR CODE HERE ***"
 
 
-
-# Tree Data Abstraction
+#Tree Data Abstraction
 
 def tree(label, branches=[]):
     """Construct a tree with the given label value and a list of branches."""
